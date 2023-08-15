@@ -405,7 +405,7 @@ export async function renderToHTMLOrFlight(
     }: {
       filePath: string
       getComponent: () => any
-      shouldPreload?: boolean
+      shouldPreload: boolean
       injectedCSS: Set<string>
     }): Promise<any> => {
       const cssHrefs = getCssInlinedLinkTags(
@@ -621,6 +621,7 @@ export async function renderToHTMLOrFlight(
       const [ErrorComponent, errorStyles] = error
         ? await createComponentAndStyles({
             filePath: error[1],
+            shouldPreload: true,
             getComponent: error[0],
             injectedCSS: injectedCSSWithCurrentLayout,
           })
@@ -629,6 +630,7 @@ export async function renderToHTMLOrFlight(
       const [Loading, loadingStyles] = loading
         ? await createComponentAndStyles({
             filePath: loading[1],
+            shouldPreload: true,
             getComponent: loading[0],
             injectedCSS: injectedCSSWithCurrentLayout,
           })
@@ -651,6 +653,7 @@ export async function renderToHTMLOrFlight(
       const [NotFound, notFoundStyles] = notFound
         ? await createComponentAndStyles({
             filePath: notFound[1],
+            shouldPreload: true,
             getComponent: notFound[0],
             injectedCSS: injectedCSSWithCurrentLayout,
           })
